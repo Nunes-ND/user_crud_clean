@@ -5,10 +5,14 @@
 	"main": "dist/main.js",
 	"scripts": {
 		"start": "node dist/main.js",
-		"dev": "node --import tsx --watch src/main.ts",
+		"dev": "NODE_ENV=development node --env-file .env --import tsx --watch src/main.ts",
 		"build": "npm run clean && tsc",
 		"clean": "rm -rf dist/",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"debug:attach": "npm run dev -- --inspect-brk",
+		"debug:attach:no-watch": "NODE_ENV=development node --env-file .env --import tsx --inspect-brk src/main.ts",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:debug:attach": "vitest --inspect-brk --pool threads --poolOptions.threads.singleThread"
 	},
 	"keywords": [
 		"CRUD",
@@ -31,6 +35,7 @@
 	"devDependencies": {
 		"@types/node": "^24.0.1",
 		"tsx": "^4.20.1",
-		"typescript": "^5.8.3"
+		"typescript": "^5.8.3",
+		"vitest": "^3.2.3"
 	}
 }
