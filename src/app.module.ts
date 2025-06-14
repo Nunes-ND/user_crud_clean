@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ApiController } from "./api/api.controller.js";
 import { User } from "./database/entities/User.js";
+import { ApiModule } from "./infra/http/api/api.module.js";
 
 @Module({
 	imports: [
@@ -16,7 +16,7 @@ import { User } from "./database/entities/User.js";
 			synchronize: process.env.NODE_ENV === "development",
 		}),
 		TypeOrmModule.forFeature([User]),
+		ApiModule,
 	],
-	controllers: [ApiController],
 })
 export class AppModule {}
