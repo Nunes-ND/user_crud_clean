@@ -40,8 +40,13 @@
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@types/node": "^24.0.1",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.1.0",
 		"tsx": "^4.20.1",
 		"typescript": "^5.8.3",
 		"vitest": "^3.2.3"
+	},
+	"lint-staged": {
+		"src/**/*.{ts,tsx}": "biome check --apply --no-errors-on-unmatched"
 	}
 }
