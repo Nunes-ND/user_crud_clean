@@ -1,4 +1,4 @@
-import type { IHealthChecker } from "../ports/health.checker.port.js";
+import type { IHealthChecker } from "../ports/health-checker.port.js";
 
 export interface BaseHealthInfo {
 	status: string;
