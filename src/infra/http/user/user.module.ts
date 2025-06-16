@@ -13,7 +13,10 @@ import { UsersController } from "./user.controller.js";
 	providers: [
 		{
 			provide: ICreateUserUseCase,
-			useClass: CreateUserUseCase,
+			useFactory: (userRepository: IUserRepository) => {
+				return new CreateUserUseCase(userRepository);
+			},
+			inject: [IUserRepository],
 		},
 		{
 			provide: IUserRepository,

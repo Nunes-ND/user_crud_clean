@@ -16,6 +16,6 @@ export class CreateUserUseCase implements ICreateUserUseCase<User> {
 			);
 		}
 
-		return this.userRepository.create(input);
+		return await this.userRepository.create(input);
 	}
 }
