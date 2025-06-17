@@ -9,7 +9,7 @@ import {
 } from "@nestjs/common";
 import { UserAlreadyExistsError } from "../../../app/errors/user-already-exists.error.js";
 import { ICreateUserUseCase } from "../../../app/ports/create-user.port.js";
-import type { User } from "../../../infra/database/entities/user.entity.js";
+import type { CreateUserOutputDto } from "../../../app/use-cases/user/dtos/create-user-output.dto.js";
 import type { CreateUserRequestDto } from "../../../presentation/dtos/create-user-request.dto.js";
 import type { CreateUserResponseDto } from "../../../presentation/dtos/create-user.response.dto.js";
 
@@ -17,7 +17,7 @@ import type { CreateUserResponseDto } from "../../../presentation/dtos/create-us
 export class UsersController {
 	constructor(
 		@Inject(ICreateUserUseCase)
-		private readonly createUserUseCase: ICreateUserUseCase<User>,
+		private readonly createUserUseCase: ICreateUserUseCase<CreateUserOutputDto>,
 	) {}
 
 	@Post()
@@ -26,7 +26,8 @@ export class UsersController {
 		@Body() createUserDto: CreateUserRequestDto,
 	): Promise<CreateUserResponseDto> {
 		try {
-			const user: User = await this.createUserUseCase.execute(createUserDto);
+			const user: CreateUserOutputDto =
+				await this.createUserUseCase.execute(createUserDto);
 			const response: CreateUserResponseDto = {
 				name: user.name,
 				email: user.email,
